@@ -72,3 +72,5 @@ Thumbs.db
 /public/
 /.vercel/
 /node_modules/
+.vercel
+.env*

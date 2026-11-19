@@ -4,8 +4,9 @@
   "buildCommand": "npm run build",
   "installCommand": "npm ci --ignore-scripts",
   "outputDirectory": "public",
-  "functions": { "api/[...path].js": { "maxDuration": 10 } },
+  "functions": { "api/proxy.js": { "maxDuration": 10 } },
   "rewrites": [
+    { "source": "/api/v1/:endpoint", "destination": "/api/proxy?endpoint=:endpoint" },
     { "source": "/terminal", "destination": "/terminal.html" },
     { "source": "/login", "destination": "/login.html" },
     { "source": "/favicon.ico", "destination": "/mascot.png" }
