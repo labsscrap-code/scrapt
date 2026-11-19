@@ -1,6 +1,6 @@
 # Security and sensitive information
 
-This repository publishes documentation only. It does not include the SCRAPT application runtime, credentials or operational data.
+This repository publishes the approved web frontend, restricted API proxy and documentation. It does not include proprietary market processing, credentials or operational data.
 
 ## Reporting a concern
 

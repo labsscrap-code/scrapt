@@ -51,3 +51,24 @@ snapshot.json
 Thumbs.db
 .idea/
 .vscode/
+
+# Approved public frontend and Vercel integration only.
+!/.gitattributes
+!/package.json
+!/package-lock.json
+!/vercel.json
+!/.vercelignore
+!/approved-frontend.json
+!/frontend/
+!/frontend/*
+!/api/
+!/api/*.js
+!/lib/
+!/lib/*.cjs
+!/scripts/
+!/scripts/*.cjs
+!/tests/
+!/tests/*.cjs
+/public/
+/.vercel/
+/node_modules/

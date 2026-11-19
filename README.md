@@ -8,9 +8,30 @@ SCRAPT brings crypto market monitoring, derivatives indicators, sentiment and al
 
 ## About this repository
 
-This is the official **public documentation and project presentation** repository for SCRAPT, maintained under **labsscrap-code**.
+This is the official **public frontend and documentation** repository for SCRAPT, maintained under **labsscrap-code**.
 
-It contains product documentation, UX/UI direction, a conceptual architecture overview and a roadmap. It does **not** contain the application source, a runnable distribution or installation packages. Cloning this repository does not install SCRAPT.
+It contains the approved static web interface, a restricted Vercel API proxy and product documentation. The proprietary Python scanner, detection logic, database and AI integration remain on the private backend and are not included.
+
+## Web deployment
+
+Use Node.js 24: `npm ci`, `npm run build`, `npm run lint`, `npm test`.
+Vercel serves `public/` and the allowlisted `/api/v1/` function. No frontend framework or runtime dependency is required. The build verifies every approved frontend asset against its SHA-256 manifest. AI remains disabled.
+
+Configure server-side environment variables `SCRAPT_UPSTREAM_IP`,
+`SCRAPT_UPSTREAM_TLS_NAME`, `SCRAPT_UPSTREAM_ORIGIN` and optionally
+`SCRAPT_PUBLIC_ORIGIN`. Exact Vercel deployment and production hostnames are also
+accepted from Vercel's system environment variables. No credentials belong in this
+repository or in frontend configuration.
+
+The proxy verifies the upstream TLS certificate against its configured hostname,
+pins the upstream IP to prevent a DNS migration from creating a proxy loop,
+validates the actual browser Origin, and preserves secure host-only session cookies,
+CSRF tokens and backend rate limits. Authenticated responses are never cached.
+Individual pilot accounts are provisioned privately by the backend operator.
+
+Before moving the custom-domain DNS, establish a stable backend TLS hostname and
+certificate renewal independent of the frontend hostname. Do not retire the
+existing VPS services or TLS route while the proxy depends on them.
 
 ## What the existing application supports
 
@@ -24,7 +45,7 @@ It contains product documentation, UX/UI direction, a conceptual architecture ov
 | Scrappy assistant | Ask for explanations based on the dashboard's available context. |
 | Workspace controls | Use time-range controls, pause/resume and optional sound notifications. |
 
-These describe capabilities of the existing application, not software included in this repository. Data availability depends on connected services. AI explanations depend on a configured, available AI service.
+Data availability depends on connected backend services. AI explanations are disabled in this web release.
 
 SCRAPT is an information and analysis tool. It does not execute trades, promise returns or provide predictive guarantees.
 

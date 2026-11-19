@@ -1,0 +1,5 @@
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-hashes' 'sha256-0RyBTZ5ARpB/qQnipyMTRbOBWVpqg0+ok8r1HQ5hnqk=' 'sha256-7/jzCgCj7lBXGUY/3l2gd++NZHPChgF8IMIHa3NRB20=' 'sha256-Bu2JsAY3zEQl/mdXv/u1STlV0zxhQvPm69zw6VTD8Dw=' 'sha256-Cww09XKE+UP6dM25U1LqalBbSywh/HPTr7M3FE9slu0=' 'sha256-G1q8qKR/FCi2x0qZ7xISeo8Wf0h3p0C8AavPXJI1CyU=' 'sha256-p/YTYir6kqTBs+QY2YcLFsXIFaKZDUSx8nIfHlSrpQI=' 'sha256-pwQduWxX3Cm7lLbQmAos7n73RLP4QrsCDFejmsBdZ78=' 'sha256-u/zUi6g3z83f98uyirnOLu0YKQCZQ/9P4YanigTORlg='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src https://api.pilot.invalid; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer
+  Strict-Transport-Security: max-age=31536000
