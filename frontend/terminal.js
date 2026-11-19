@@ -33,7 +33,6 @@ async function load(){
   render(s);paintChart();
  }catch(error){
   lastSnapshot=null;render(ScraptClient.unavailable());paintChart();setConn(false);
-  if(error.kind==='login_required'){location.assign('/login.html');return}
   document.getElementById('stale').textContent=error.kind==='rate_limited'?
    'Límite temporal. Reintentando después de la espera…':'Datos no disponibles. Reintentando…';
  }finally{loadPending=false;}
@@ -261,14 +260,8 @@ document.getElementById('alerts').addEventListener('keydown',event=>{
 });
 document.addEventListener('keydown',event=>{if(event.key==='Escape'&&chatOpen)toggleChat()});
 document.getElementById('refreshData').addEventListener('click',load);
-document.getElementById('logout').addEventListener('click',async()=>{
- const state=document.getElementById('accountStatus');
- try{await ScraptClient.logout();location.assign('/login.html');}
- catch(error){state.textContent=error.kind==='rate_limited'?'Cierre de sesión limitado temporalmente. Reintenta.':'No se pudo cerrar la sesión. Reintenta.';}
-});
-ScraptClient.session().then(user=>{document.getElementById('accountStatus').textContent='Sesión: '+user.name;}).catch(error=>{
- if(error.kind==='login_required')location.assign('/login.html');
-});
+document.getElementById('accountStatus').textContent='Acceso público de solo lectura · sin cuenta';
+document.getElementById('logout').hidden=true;
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)load()});
 setInterval(()=>{
  if(lastSnapshot&&!document.hidden){const aged=ScraptClient.expire(lastSnapshot),key=freshnessKey(aged);

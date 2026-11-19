@@ -9,7 +9,7 @@
     "login.js": "b43dea6b7d557af8bbebd3d97504f8cb5cbde41e49207df848a45af4ff798579",
     "mascot.png": "f018d18ae0b790089f47fae14695675afc13fe89fba7818525106addf435004d",
     "terminal.html": "a0cc8ef9986b2f2aad49b0688d309e7420e6499e7bcb8ab0068cebacb8534b59",
-    "terminal.js": "044775364a23307039009fe16f1b0bf76272291ed3f6adabbed2fe9f38bdf853"
+    "terminal.js": "ac4dff54bd5091ec1d2ce0931b49605f1f730803d161c9cfc6c9638ffd22420f"
   },
   "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",
   "sameOrigin": true,

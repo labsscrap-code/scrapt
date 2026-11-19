@@ -27,7 +27,9 @@ The proxy verifies the upstream TLS certificate against its configured hostname,
 pins the upstream IP to prevent a DNS migration from creating a proxy loop,
 validates the actual browser Origin, and preserves secure host-only session cookies,
 CSRF tokens and backend rate limits. Authenticated responses are never cached.
-Individual pilot accounts are provisioned privately by the backend operator.
+The terminal uses anonymous read-only snapshots, history and alerts. Sessions,
+news and operator authentication remain protected on the backend; the public
+terminal does not request a session or redirect to login. AI remains disabled.
 
 Before moving the custom-domain DNS, establish a stable backend TLS hostname and
 certificate renewal independent of the frontend hostname. Do not retire the
