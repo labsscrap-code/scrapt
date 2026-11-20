@@ -12,7 +12,7 @@
     "terminal.js": "ac4dff54bd5091ec1d2ce0931b49605f1f730803d161c9cfc6c9638ffd22420f",
     "motion.css": "d37ff5089fe1a38b659a44d1d8dd147b79b59e3b4b076d07db0ae36850357e31",
     "landing-motion.js": "ec2828d2f446ec26ff37fb9b37de83d76acf89bcc43d0fd82c90c0910db262af",
-    "surface-motion.js": "61b35f75dd0a5ce54d895a36a032c4c8f9b5cee7006ccc16d4d50446e3f2e344"
+    "surface-motion.js": "0d78d8f609327adfcfb62dc3002d2279482d02a6640f849bf959545c30c2ebf3"
   },
   "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",
   "sameOrigin": true,
