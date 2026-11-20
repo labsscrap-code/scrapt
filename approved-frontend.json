@@ -10,7 +10,7 @@
     "mascot.png": "f018d18ae0b790089f47fae14695675afc13fe89fba7818525106addf435004d",
     "terminal.html": "a0cc8ef9986b2f2aad49b0688d309e7420e6499e7bcb8ab0068cebacb8534b59",
     "terminal.js": "ac4dff54bd5091ec1d2ce0931b49605f1f730803d161c9cfc6c9638ffd22420f",
-    "motion.css": "dff535ae179a0c897a74933f3c4546acadf8436d697a362ad1186ff22302bda2",
+    "motion.css": "f7f76b9241ab6667be33d223d809a6d8384eb0c6b7f8277b36dc83298220e148",
     "landing-motion.js": "68cc459736c0c4ae0d668e759161f2bcaf1bb07896265c97a56847bfce6961c9"
   },
   "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",

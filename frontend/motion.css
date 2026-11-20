@@ -11,4 +11,4 @@ body::after{content:"";position:fixed;inset:-8px;z-index:20;pointer-events:none;
 .ticker-cycle{flex-shrink:0;padding-right:28px}
 .ticker-cycle .quote{flex-shrink:0}
 @media(max-width:600px){.ticker-track,.ticker-cycle{gap:20px}.ticker-track{gap:0}.ticker-cycle{padding-right:20px}}
-@media(prefers-reduced-motion:reduce){body::after{animation:none;opacity:.02}.motion-piece{transform:none!important;will-change:auto}.motion-ambient{animation:none;transform:none}.ticker-track{transform:none!important;will-change:auto}.ticker-cycle[aria-hidden="true"]{display:none}.quotes.motion-ticker{overflow-x:auto}}
+@media(prefers-reduced-motion:reduce){body::after{animation:none;opacity:.02}.motion-piece{transform:none!important;will-change:auto}.motion-ambient{animation:none;transform:none}.ticker-track{transform:none!important;will-change:auto}.ticker-cycle[aria-hidden="true"],.ticker-cycle .quote[aria-hidden="true"]{display:none}.quotes.motion-ticker{overflow-x:auto}}
