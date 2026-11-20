@@ -11,3 +11,4 @@ public
 neural-frontier/node_modules
 neural-frontier/.next
 neural-frontier/*.tsbuildinfo
+!neural-frontier/README.md
