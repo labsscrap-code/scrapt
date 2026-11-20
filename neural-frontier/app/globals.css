@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 6 8 13;
+  --surface: 11 15 23;
+  --surface-2: 15 22 34;
+  --edge: 26 34 51;
+  --text: 229 234 243;
+  --text-dim: 124 138 165;
+  --text-faint: 70 83 107;
+  --accent: 59 130 246;
+  --accent-mid: 56 189 248;
+  --accent-soft: 34 211 238;
+  --accent-glow: 59 130 246;
+  --success: 34 197 94;
+  --success-soft: 52 211 153;
+  --warning: 245 158 11;
+  --danger: 239 68 68;
+}
+
+[data-accent="amber"] {
+  --accent: 245 158 11;
+  --accent-mid: 251 191 36;
+  --accent-soft: 252 211 77;
+  --accent-glow: 245 158 11;
+}
+
+@layer base {
+  * {
+    border-color: rgb(var(--edge));
+  }
+  html,
+  body {
+    height: 100%;
+  }
+  body {
+    background-color: rgb(var(--background));
+    color: rgb(var(--text));
+    font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow: hidden;
+  }
+  ::selection {
+    background: rgb(var(--accent) / 0.25);
+    color: #fff;
+  }
+}
+
+.scroll-thin {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--edge)) transparent;
+}
+.scroll-thin::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+.scroll-thin::-webkit-scrollbar-thumb {
+  background: rgb(var(--edge) / 0.9);
+  border-radius: 99px;
+}
+.scroll-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@keyframes log-in {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.log-in {
+  animation: log-in 280ms ease-out;
+}
+
+@keyframes blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+.cursor-blink {
+  animation: blink 1.05s steps(1, end) infinite;
+}
+
+.hud-grid {
+  background-image: linear-gradient(
+      to right,
+      rgb(26 34 51 / 0.35) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgb(26 34 51 / 0.35) 1px, transparent 1px);
+  background-size: 28px 28px;
+}

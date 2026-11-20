@@ -9,3 +9,5 @@ for(const [name,hash] of Object.entries(approved.files)) {
   fs.writeFileSync(path.join(root,'public',name),data);
 }
 console.log('Built '+Object.keys(approved.files).length+' approved assets; chat activation is server-guarded.');
+
+require("./build-neural.cjs");

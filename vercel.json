@@ -2,12 +2,13 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
   "buildCommand": "npm run build",
-  "installCommand": "npm ci --ignore-scripts",
+  "installCommand": "npm ci --ignore-scripts && npm ci --prefix neural-frontier --ignore-scripts --include=dev",
   "outputDirectory": "public",
   "functions": { "api/proxy.js": { "maxDuration": 25 } },
   "rewrites": [
     { "source": "/api/v1/:endpoint", "destination": "/api/proxy?endpoint=:endpoint" },
     { "source": "/terminal", "destination": "/terminal.html" },
+    { "source": "/neural-frontier", "destination": "/neural-frontier/index.html" },
     { "source": "/login", "destination": "/login.html" },
     { "source": "/favicon.ico", "destination": "/mascot.png" }
   ],

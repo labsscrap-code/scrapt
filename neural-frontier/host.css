@@ -1,0 +1,9 @@
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:100 800;font-display:swap;src:url('/neural-frontier/jetbrains-mono-latin.woff2') format('woff2')}
+:root{--font-mono:'JetBrains Mono'}
+.frontier-host{height:32px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 12px;border-bottom:1px solid rgb(var(--edge));background:rgb(var(--background));font-size:9px;letter-spacing:.06em;white-space:nowrap}
+.frontier-host span{color:rgb(var(--text-dim))}
+.frontier-host a:focus-visible{outline:1px solid rgb(var(--accent));outline-offset:3px}
+.frontier-viewport{height:calc(100dvh - 32px);overflow:auto}
+#neural-root{min-width:1280px;height:100%;min-height:720px}
+#neural-root>.h-screen{height:100%}
+@media(max-width:540px){.frontier-host{font-size:8px;gap:6px;padding:0 8px}.frontier-host span{letter-spacing:0}}
