@@ -1,0 +1,23 @@
+/* Landing palette only. Geometry, typography and motion live in the approved styles. */
+:root{color-scheme:dark;--bg:#080D18;--surface:#111B2B;--ink:#F2F5FA;--muted:#8794AD;--line:#273B5A;--electric:#2D7DFF;--signal:#FF693B}
+::selection{background:#2D7DFF;color:#F2F5FA}
+:focus-visible{outline-color:var(--signal)}
+nav a:hover{color:var(--signal);border-color:var(--signal)}
+nav a[aria-current]{border-color:var(--electric)}
+.outline{border-color:var(--electric);background:rgb(17 27 43 / .5)}
+.outline:hover{background:var(--signal);border-color:var(--signal);color:var(--bg)}
+.cta{background:var(--signal);border-color:var(--signal);color:var(--bg)}
+.cta:hover{background:#FF825B;border-color:#FF825B}
+.edition i{background:var(--electric)}
+.edition i:last-child{background:var(--line)}
+.art .module{fill:var(--ink)}
+.art #grid path{stroke:var(--electric);stroke-opacity:.28}
+.art svg>rect{stroke:var(--line)}
+.ticker,.ticker>strong{border-color:var(--line)}
+.up{color:#50D68B}
+.down{color:#FF7A86}
+.strap{color:var(--muted)}
+.features,.feature,.close{border-color:var(--line)}
+.feature{background:rgb(17 27 43 / .68)}
+.feature .num{color:#7AAFFF}
+.skip{background:var(--signal);color:var(--bg)}

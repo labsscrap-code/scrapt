@@ -2,7 +2,7 @@
   "files": {
     "api-client.js": "a0ee23e1d565dde4fd37361407daa87104ea548a807a7ba18ad4b5a86529134c",
     "config.js": "696a5977aeb736c55e9f70289131fa084b7958a1dc7ca5393edd17f3f0ac6854",
-    "index.html": "7946205bff5edcd667718d71dae1cb586664301c84797b5f34b642333fde5809",
+    "index.html": "4a68f0cd55f6ad81bf7467a07ad42dacb6025d8ff876a5bafc74dc0dd41141b5",
     "index.js": "516cb7e236fe2c6386392d77e7aaf08b8108bb4b6df27c35591278458af844af",
     "login.css": "cecddeea74669c856bba5e7e11a73a1275082ddefd19c38b961394f45c33144d",
     "login.html": "024020d9945957605984dd55dc5bfce65e267c44f790af89c7dc42fcf26524c5",
@@ -12,7 +12,8 @@
     "terminal.js": "33b642ce22b26c157b564580a0c401ba0edcc9f91efd81ac335feee05aac6b91",
     "motion.css": "d37ff5089fe1a38b659a44d1d8dd147b79b59e3b4b076d07db0ae36850357e31",
     "landing-motion.js": "ec2828d2f446ec26ff37fb9b37de83d76acf89bcc43d0fd82c90c0910db262af",
-    "surface-motion.js": "0d78d8f609327adfcfb62dc3002d2279482d02a6640f849bf959545c30c2ebf3"
+    "surface-motion.js": "b8174d469b277ece3615bed2978658c9439bc6c5560863df7c1e62b0adb7ee51",
+    "landing-theme.css": "66781afabd0e1001d51f0feb4fd1c00b77c5c7273fa7ae5bcc369d4d8fd5ec49"
   },
   "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",
   "sameOrigin": true,

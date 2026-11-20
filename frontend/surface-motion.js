@@ -23,10 +23,10 @@
     const a={x:width*(.5+.3*Math.sin(t)),y:height*(.45+.28*Math.cos(t*.71))};
     const b={x:width*(.5+.36*Math.cos(t*.63+2)),y:height*(.5+.32*Math.sin(t*.81+1))};
     field.clearRect(0,0,96,64);
-    for(const [point,color] of [[a,'255,250,242'],[b,'236,245,255']]){
+    for(const [point,color,peak,shoulder] of [[a,'45,125,255',.18,.06],[b,'255,105,59',.065,.022]]){
       const x=point.x/width*96,y=point.y/height*64;
       const gradient=field.createRadialGradient(x,y,0,x,y,44);
-      gradient.addColorStop(0,`rgba(${color},.58)`);gradient.addColorStop(.5,`rgba(${color},.24)`);gradient.addColorStop(1,`rgba(${color},0)`);
+      gradient.addColorStop(0,`rgba(${color},${peak})`);gradient.addColorStop(.5,`rgba(${color},${shoulder})`);gradient.addColorStop(1,`rgba(${color},0)`);
       field.fillStyle=gradient;field.fillRect(0,0,96,64);
     }
     context.clearRect(0,0,width,height);context.imageSmoothingEnabled=true;
@@ -47,7 +47,7 @@
         paths[Math.max(0,Math.floor(energy*8))].rect(x,y,dot,dot);
       }
     }
-    for(let i=0;i<paths.length;i++){context.fillStyle=`rgba(28,30,32,${.19+i*.055})`;context.fill(paths[i]);}
+    for(let i=0;i<paths.length;i++){context.fillStyle=`rgba(79,128,203,${.22+i*.045})`;context.fill(paths[i]);}
   }
   function tick(now){
     frame=0;if(document.hidden||reduced.matches)return;
