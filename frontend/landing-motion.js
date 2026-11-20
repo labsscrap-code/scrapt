@@ -8,16 +8,16 @@
   const pieces=module?[...module.children].map((shape,i)=>{
     const bounds=shape.getBBox(),outer=document.createElementNS(svgNS,'g'),inner=document.createElementNS(svgNS,'g');
     outer.classList.add('motion-piece');inner.classList.add('motion-ambient');
-    inner.style.setProperty('--drift-duration',(8+i*.83)+'s');inner.style.setProperty('--drift-delay',(-i*1.9)+'s');
-    inner.style.setProperty('--drift-x',((i%2?1:-1)*(1+i%3*.45))+'px');
-    inner.style.setProperty('--drift-y',((i%3?1:-1)*1.6)+'px');
-    inner.style.setProperty('--drift-r',(i%2?'.18':'-.18')+'deg');
+    inner.style.setProperty('--drift-duration',(6.8+i*.57)+'s');inner.style.setProperty('--drift-delay',(-i*1.35)+'s');
+    inner.style.setProperty('--drift-x',((i%2?1:-1)*(6+i%3*2))+'px');
+    inner.style.setProperty('--drift-y',((i%3?1:-1)*(7+i%2*3))+'px');
+    inner.style.setProperty('--drift-r',(i%2?'1.7':'-1.4')+'deg');
     module.insertBefore(outer,shape);outer.append(inner);inner.append(shape);
-    return {element:outer,cx:bounds.x+bounds.width/2,cy:bounds.y+bounds.height/2,x:0,y:0,vx:0,vy:0};
+    return {element:outer,cx:bounds.x+bounds.width/2,cy:bounds.y+bounds.height/2,x:0,y:0,vx:0,vy:0,rotation:0,vr:0};
   }):[];
   function resetArt(){
     cancelAnimationFrame(frame);frame=0;lastTime=0;active=false;
-    for(const p of pieces){p.x=p.y=p.vx=p.vy=0;p.element.removeAttribute('transform');}
+    for(const p of pieces){p.x=p.y=p.vx=p.vy=p.rotation=p.vr=0;p.element.removeAttribute('transform');}
   }
   function animate(now){
     frame=0;if(reduce.matches||!visible||document.hidden){resetArt();return;}
@@ -25,13 +25,17 @@
     let moving=false;
     for(const p of pieces){
       const dx=pointer.x-p.cx,dy=pointer.y-p.cy,distance=Math.hypot(dx,dy);
-      const influence=active?Math.max(0,1-distance/460):0;
-      const tx=active?Math.max(-7,Math.min(7,dx*.025*influence)):0;
-      const ty=active?Math.max(-7,Math.min(7,dy*.025*influence)):0;
-      p.vx+=((tx-p.x)*105-p.vx*19)*dt;p.vy+=((ty-p.y)*105-p.vy*19)*dt;
+      const influence=active?Math.max(0,1-distance/520):0;
+      // A shared pull holds the sculpture together; nearby pieces gently repel.
+      const polarity=Math.max(-.65,Math.min(1,(distance-115)/75));
+      const tx=active?Math.max(-24,Math.min(24,dx*.105*influence*polarity+(pointer.x-240)*.035)):0;
+      const ty=active?Math.max(-24,Math.min(24,dy*.105*influence*polarity+(pointer.y-240)*.035)):0;
+      const targetRotation=active?Math.max(-3,Math.min(3,dx*.012*influence)):0;
+      p.vx+=((tx-p.x)*95-p.vx*15)*dt;p.vy+=((ty-p.y)*95-p.vy*15)*dt;
+      p.vr+=((targetRotation-p.rotation)*85-p.vr*15)*dt;p.rotation+=p.vr*dt;
       p.x+=p.vx*dt;p.y+=p.vy*dt;
-      p.element.setAttribute('transform',`translate(${p.x.toFixed(3)} ${p.y.toFixed(3)})`);
-      if(Math.abs(tx-p.x)+Math.abs(ty-p.y)+Math.abs(p.vx)+Math.abs(p.vy)>.015)moving=true;
+      p.element.setAttribute('transform',`translate(${p.x.toFixed(3)} ${p.y.toFixed(3)}) rotate(${p.rotation.toFixed(3)} ${p.cx} ${p.cy})`);
+      if(Math.abs(tx-p.x)+Math.abs(ty-p.y)+Math.abs(p.vx)+Math.abs(p.vy)+Math.abs(targetRotation-p.rotation)+Math.abs(p.vr)>.015)moving=true;
     }
     if(moving)frame=requestAnimationFrame(animate);else lastTime=0;
   }

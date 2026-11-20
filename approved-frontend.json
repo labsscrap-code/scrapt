@@ -2,7 +2,7 @@
   "files": {
     "api-client.js": "12b2d18777752db12bc7a1e88a6b9d2b29bef8ade625f68cedfadbdeadfe572c",
     "config.js": "696a5977aeb736c55e9f70289131fa084b7958a1dc7ca5393edd17f3f0ac6854",
-    "index.html": "196df5826e4167e8c9a076581cfef9b787bbfddc755dd54bb082e7cb6b470406",
+    "index.html": "c3bfebc8ee2c26dc136f9a50f0b221dc92caa2ff780ed31d5201ac689834fb11",
     "index.js": "516cb7e236fe2c6386392d77e7aaf08b8108bb4b6df27c35591278458af844af",
     "login.css": "cecddeea74669c856bba5e7e11a73a1275082ddefd19c38b961394f45c33144d",
     "login.html": "024020d9945957605984dd55dc5bfce65e267c44f790af89c7dc42fcf26524c5",
@@ -10,8 +10,9 @@
     "mascot.png": "f018d18ae0b790089f47fae14695675afc13fe89fba7818525106addf435004d",
     "terminal.html": "a0cc8ef9986b2f2aad49b0688d309e7420e6499e7bcb8ab0068cebacb8534b59",
     "terminal.js": "ac4dff54bd5091ec1d2ce0931b49605f1f730803d161c9cfc6c9638ffd22420f",
-    "motion.css": "f7f76b9241ab6667be33d223d809a6d8384eb0c6b7f8277b36dc83298220e148",
-    "landing-motion.js": "68cc459736c0c4ae0d668e759161f2bcaf1bb07896265c97a56847bfce6961c9"
+    "motion.css": "d37ff5089fe1a38b659a44d1d8dd147b79b59e3b4b076d07db0ae36850357e31",
+    "landing-motion.js": "ec2828d2f446ec26ff37fb9b37de83d76acf89bcc43d0fd82c90c0910db262af",
+    "surface-motion.js": "61b35f75dd0a5ce54d895a36a032c4c8f9b5cee7006ccc16d4d50446e3f2e344"
   },
   "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",
   "sameOrigin": true,
