@@ -47,6 +47,21 @@ test('unknown routes and methods cannot proxy arbitrary backend endpoints',async
   assert.equal((await execute({method:'POST'})).res.statusCode,405);
 });
 test('AI remains disabled without upstream request',async()=>{const {res,captured}=await execute({path:'/api/v1/scrappy',method:'POST'});assert.equal(res.statusCode,503);assert.equal(captured.length,0);});
+test('explicitly enabled anonymous chat validates Origin, schema and bounded timeout',async()=>{
+ const base={path:'/api/v1/scrappy',method:'POST',env:{SCRAPT_SCRAPPY_ENABLED:'enabled'},
+   headers:{origin:ENV.SCRAPT_PUBLIC_ORIGIN,'content-type':'application/json',cookie:'__Host-scrappy=anonymous_session; unrelated=secret'},body:{message:'BTC?'}};
+ const {res,captured}=await execute(base);assert.equal(res.statusCode,200);assert.equal(captured[0].options.timeout,23000);
+ assert.equal(captured[0].options.headers.Cookie,'__Host-scrappy=anonymous_session');assert.equal(captured[0].options.headers.Origin,'https://scrapt.tech');
+ assert.equal((await execute({...base,headers:{...base.headers,origin:'https://evil.example'}})).res.statusCode,403);
+ for(const body of [{message:'x'.repeat(2001)},{message:' '},{message:'BTC',messages:[]}])assert.equal((await execute({...base,body})).res.statusCode,422);
+});
+test('conversation cookie remains host-only, secure and HttpOnly',async()=>{
+ const cookie='__Host-scrappy=conversation; HttpOnly; Path=/; SameSite=strict; Secure';
+ const {res}=await execute({responseHeaders:{'content-type':'application/json','set-cookie':[cookie]}});
+ assert.deepEqual(res.headers['set-cookie'],[cookie]);
+ assert.equal(sessionCookie('__Host-scrapt=owner; __Host-scrappy=conversation'),'__Host-scrapt=owner; __Host-scrappy=conversation');
+ assert.equal(sessionCookie('__Host-scrappy=one; __Host-scrappy=two'),'');
+});
 test('pagination preserved and arbitrary query rejected',async()=>{
   const {captured}=await execute({path:'/api/v1/alerts?limit=50&before=100'});assert.equal(captured[0].options.path,'/api/v1/alerts?limit=50&before=100');
   assert.equal((await execute({path:'/api/v1/snapshot?url=https://evil.example'})).res.statusCode,400);

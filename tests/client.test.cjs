@@ -21,10 +21,20 @@ test('same-origin cookie credentials and no-store on production paths',async()=>
 test('HTTP refused without issuing a network request',async()=>{
  const e=setup();e.context.location.protocol='http:';await assert.rejects(e.client.session(),e=>e.kind==='https_required');assert.equal(e.requests.length,0);
 });
-test('AI and configuration endpoints not callable',async()=>{
- const e=setup();assert.equal(e.client.AI_ENABLED,false);
- for(const route of ['/scrappy','/config','https://provider.invalid/chat'])await assert.rejects(e.client.request(route),e=>e.kind==='route_not_allowed');
+test('configuration and arbitrary provider endpoints remain blocked',async()=>{
+ const e=setup();assert.equal(e.client.AI_ENABLED,true);
+ for(const route of ['/config','https://provider.invalid/chat'])await assert.rejects(e.client.request(route),e=>e.kind==='route_not_allowed');
  assert.equal(e.requests.length,0);
+});
+test('anonymous chat uses one same-origin request without requesting an account session',async()=>{
+ const e=setup(async()=>json({ok:true,answer:'Observed market data'}));assert.equal(await e.client.chat('BTC?'),'Observed market data');
+ assert.equal(e.requests.length,1);assert.equal(e.requests[0].url,'/api/v1/scrappy');assert.equal(e.requests[0].options.credentials,'same-origin');
+ assert.equal(e.requests[0].options.headers['X-SCRAPT-CSRF'],undefined);
+});
+test('chat rate limits do not pause independent market polling',async()=>{
+ const e=setup(async url=>url.endsWith('/scrappy')?json({},429,{'Retry-After':'60'}):json(sample()));
+ await assert.rejects(e.client.chat('BTC?'),e=>e.kind==='rate_limited');
+ const market=await e.client.snapshot();assert.equal(market.spot24h.BTCUSDT.precio,123);assert.equal(e.client.retryMs(),5000);
 });
 test('zero funding and Fear/Greed are valid, missing price remains null',()=>{
  const e=setup();let s=sample();s.spot24h.BTCUSDT.precio=NaN;s=e.client.expire(e.client.normalize(s));

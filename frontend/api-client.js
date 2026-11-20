@@ -9,7 +9,7 @@ window.ScraptClient = (() => {
   const escapeText = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const TTL = Object.freeze({spot:90,funding:90,openInterest:90,trades:10,book:10,kline:90,fearGreed:300,defi:300});
   const REQUIRED = ['spot','funding','openInterest','trades','book','fearGreed'];
-  let csrf = '', sessionPending = null, blockedUntil = 0;
+  let csrf = '', sessionPending = null, blockedUntil = 0, chatBlockedUntil = 0;
   let history = null, historyAt = 0, alerts = null, alertsAt = 0;
   class ApiError extends Error {
     constructor(kind, status=0, retryAfter=0) { super(kind); this.kind=kind; this.status=status; this.retryAfter=retryAfter; }
@@ -17,12 +17,13 @@ window.ScraptClient = (() => {
   const clock = () => performance.now();
   async function request(path, options={}) {
     if (location.protocol !== 'https:') throw new ApiError('https_required');
-    if (!/^\/(login|logout|session|snapshot|history|alerts|news)(\?[^#]*)?$/.test(path)) throw new ApiError('route_not_allowed');
-    if (Date.now() < blockedUntil) throw new ApiError('rate_limited',429,Math.ceil((blockedUntil-Date.now())/1000));
-    const controller = new AbortController(), timer = setTimeout(() => controller.abort(),8000);
+    if (!/^\/(login|logout|session|snapshot|history|alerts|news|scrappy)(\?[^#]*)?$/.test(path)) throw new ApiError('route_not_allowed');
+    const chat=path==='/scrappy', until=chat?chatBlockedUntil:blockedUntil;
+    if (Date.now() < until) throw new ApiError('rate_limited',429,Math.ceil((until-Date.now())/1000));
+    const controller = new AbortController(), timer = setTimeout(() => controller.abort(),chat?25000:8000);
     try {
       const headers = {'Accept':'application/json',...(options.headers || {})};
-      if (options.method === 'POST' && path !== '/login') {
+      if (options.method === 'POST' && path !== '/login' && !chat) {
         if (!csrf) await session();
         headers['X-SCRAPT-CSRF'] = csrf;
       }
@@ -31,7 +32,8 @@ window.ScraptClient = (() => {
       if (response.status === 429) {
         const raw=Number(response.headers.get('Retry-After'));
         const retry=Number.isFinite(raw)&&raw>0?Math.min(raw,300):60;
-        blockedUntil=Date.now()+retry*1000;throw new ApiError('rate_limited',429,retry);
+        if(chat)chatBlockedUntil=Date.now()+retry*1000;else blockedUntil=Date.now()+retry*1000;
+        throw new ApiError('rate_limited',429,retry);
       }
       if (response.status === 401) { csrf=''; throw new ApiError(path==='/login'?'invalid_login':'login_required',401); }
       if (!response.ok) throw new ApiError(response.status===403?'access_denied':response.status===503?'unavailable':'http_error',response.status);
@@ -57,6 +59,11 @@ window.ScraptClient = (() => {
   async function logout() {
     await request('/logout',{method:'POST'});
     csrf='';history=null;alerts=null;historyAt=alertsAt=0;
+  }
+  async function chat(message) {
+    const data=await request('/scrappy',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message})});
+    if(data.ok!==true||typeof data.answer!=='string'||!data.answer.trim())throw new ApiError('invalid_response');
+    return data.answer;
   }
   function normalizeAlert(raw, persisted=false) {
     raw=record(raw);
@@ -150,6 +157,6 @@ window.ScraptClient = (() => {
       price_history:[],fut_history:[],sourceHealth:{},workerFresh:false,clockSynchronized:false,
       connectionFresh:false,alertsState:'unavailable',historyState:'unavailable',windowWarming:true};
   }
-  return Object.freeze({request,session,login,logout,snapshot,normalize,expire,unavailable,escapeText,ApiError,
-    AI_ENABLED:false,pollMs:5000,retryMs:()=>Math.max(5000,blockedUntil-Date.now())});
+  return Object.freeze({request,session,login,logout,chat,snapshot,normalize,expire,unavailable,escapeText,ApiError,
+    AI_ENABLED:true,pollMs:5000,retryMs:()=>Math.max(5000,blockedUntil-Date.now())});
 })();

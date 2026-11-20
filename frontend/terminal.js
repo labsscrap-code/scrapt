@@ -198,7 +198,7 @@ function tape(s){
  }
  if(track.innerHTML!==lastTape){lastTape=track.innerHTML;target.replaceChildren(...track.childNodes)}
 }
-// Scrappy remains visible and navigable, but cannot send an AI request.
+// Chat uses the same-origin bounded server endpoint; market polling is independent.
 let chatOpen=false;
 function toggleChat(){
  chatOpen=!chatOpen;
@@ -206,7 +206,25 @@ function toggleChat(){
  document.getElementById('chatPanel').classList.toggle('open',chatOpen);
  if(chatOpen)document.querySelector('.chat-head .x').focus();else document.getElementById('scrappy').focus();
 }
-function sendChat(){document.querySelector('.chat-head .st').textContent='IA desactivada';}
+let chatPending=false;
+async function sendChat(){
+ const input=document.getElementById('chatInput'),message=input.value.trim();
+ if(chatPending||!message)return;
+ const status=document.querySelector('.chat-head .st'),button=document.querySelector('.chat-in button'),body=document.getElementById('chatBody');
+ if(message.length>2000){status.textContent='Máximo 2000 caracteres';return;}
+ const add=(text,kind)=>{const row=document.createElement('div');row.className='bm '+kind;row.textContent=text;body.append(row);while(body.children.length>20)body.firstElementChild.remove();body.scrollTop=body.scrollHeight;};
+ chatPending=true;button.disabled=true;input.disabled=true;status.textContent='Consultando datos reales…';
+ add(message,'user');input.value='';
+ try{add(await ScraptClient.chat(message),'bot');status.textContent='Scrappy · contexto actualizado';}
+ catch(error){
+  const text=error.kind==='rate_limited'?`Límite temporal o servicio ocupado. Reintenta en ${error.retryAfter||60} segundos.`:
+   error.kind==='timeout'?'La IA no respondió a tiempo. Los datos del mercado siguen disponibles.':
+   'Scrappy no está disponible temporalmente. No se ha generado una respuesta.';
+  add(text,'bot');status.textContent='IA temporalmente no disponible';input.value=message;
+ }finally{chatPending=false;button.disabled=false;input.disabled=false;input.focus();}
+}
+document.querySelector('.chat-in button').addEventListener('click',sendChat);
+document.getElementById('chatInput').addEventListener('keydown',event=>{if(event.key==='Enter'&&!event.isComposing){event.preventDefault();sendChat();}});
 function soundCheck(al){
  const hi=al.filter(a=>a.urgencia>=4&&a.ts>lastAlertTs);
  if(hi.length&&SOUND)beep();

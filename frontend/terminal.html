@@ -292,23 +292,23 @@ body{height:100dvh;display:flex;flex-direction:column;padding-bottom:130px}heade
     <span class="ring"></span>
     <img src="/mascot.png?v=3" alt="Scrappy">
   </div>
-  <div class="tag"><span class="st"></span><b>Scrappy</b>&nbsp;· IA desactivada</div>
+  <div class="tag"><span class="st"></span><b>Scrappy</b>&nbsp;· IA de mercado</div>
 </button>
 <div id="scrappyBubble"></div>
 
 <div id="chatPanel" role="region" aria-label="Chat con Scrappy">
   <div class="chat-head">
     <img src="/mascot.png?v=3" alt="">
-    <div><div class="nm">Scrappy</div><div class="st">IA desactivada</div></div>
+    <div><div class="nm">Scrappy</div><div class="st">Contexto de mercado en vivo</div></div>
     <button type="button" class="x" aria-label="Cerrar chat">✕</button>
   </div>
   <div class="chat-body" id="chatBody" role="log" aria-live="polite">
-    <div class="bm bot">Scrappy AI está desactivado en este piloto. Los datos de mercado, el scanner y las alertas cuantitativas siguen disponibles. No se enviarán preguntas a ningún proveedor.</div>
+    <div class="bm bot">Soy Scrappy. Pregúntame por BTC, funding, open interest o alertas. Uso datos reales del panel e indico cuando faltan datos. Mantengo hasta cuatro intercambios durante 30 minutos.</div>
   </div>
   <div class="chat-sug" id="sug"></div>
   <div class="chat-in">
-    <input id="chatInput" disabled aria-label="Tu pregunta para Scrappy" placeholder="IA desactivada">
-    <button type="button" disabled>Enviar</button>
+    <input id="chatInput" maxlength="2000" aria-label="Tu pregunta para Scrappy" placeholder="Pregunta sobre el mercado…">
+    <button type="button">Enviar</button>
   </div>
 </div>
 
