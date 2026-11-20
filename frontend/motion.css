@@ -1,0 +1,14 @@
+/* Landing motion only: the approved geometry and layout remain unchanged. */
+body::after{content:"";position:fixed;inset:-8px;z-index:20;pointer-events:none;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Cpath fill='%23000' filter='url(%23n)' d='M0 0h160v160H0z'/%3E%3C/svg%3E");background-size:160px 160px;animation:film-grain 4.9s steps(1,end) infinite;will-change:transform}
+@keyframes film-grain{0%,100%{transform:translate3d(0,0,0);opacity:.025}21%{transform:translate3d(-3px,2px,0);opacity:.022}47%{transform:translate3d(2px,-3px,0);opacity:.026}68%{transform:translate3d(-2px,-1px,0);opacity:.023}86%{transform:translate3d(3px,2px,0);opacity:.025}}
+.motion-piece{transform-box:view-box;transform-origin:240px 240px;will-change:transform}
+.motion-ambient{transform-box:fill-box;transform-origin:center;animation:art-breathe var(--drift-duration,9s) ease-in-out var(--drift-delay,0s) infinite alternate}
+@keyframes art-breathe{from{transform:translate(0,0) rotate(0deg)}to{transform:translate(var(--drift-x,1px),var(--drift-y,2px)) rotate(var(--drift-r,.2deg))}}
+.art.is-resting .motion-ambient,.motion-suspended .motion-ambient,.motion-suspended::after{animation-play-state:paused}
+.quotes.motion-ticker{display:block;overflow:hidden;min-width:0}
+.ticker-track,.ticker-cycle{display:flex;align-items:center;width:max-content;gap:28px}
+.ticker-track{gap:0;will-change:transform}
+.ticker-cycle{flex-shrink:0;padding-right:28px}
+.ticker-cycle .quote{flex-shrink:0}
+@media(max-width:600px){.ticker-track,.ticker-cycle{gap:20px}.ticker-track{gap:0}.ticker-cycle{padding-right:20px}}
+@media(prefers-reduced-motion:reduce){body::after{animation:none;opacity:.02}.motion-piece{transform:none!important;will-change:auto}.motion-ambient{animation:none;transform:none}.ticker-track{transform:none!important;will-change:auto}.ticker-cycle[aria-hidden="true"]{display:none}.quotes.motion-ticker{overflow-x:auto}}
