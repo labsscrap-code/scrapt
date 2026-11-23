@@ -13,10 +13,11 @@
     { "source": "/favicon.ico", "destination": "/mascot.png" }
   ],
   "headers": [{ "source": "/(.*)", "headers": [
-    { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'" },
     { "key": "X-Content-Type-Options", "value": "nosniff" },
     { "key": "Referrer-Policy", "value": "no-referrer" },
     { "key": "Cache-Control", "value": "no-store" },
     { "key": "Strict-Transport-Security", "value": "max-age=3600" }
-  ] }]
+  ] },
+  {"source":"/((?!neural-frontier(?:/|$)).*)","headers":[{"key":"Content-Security-Policy","value":"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'"}]},
+  {"source":"/neural-frontier/:path*","headers":[{"key":"Content-Security-Policy","value":"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'self'; form-action 'self'"}]}]
 }

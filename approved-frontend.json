@@ -2,7 +2,7 @@
   "files": {
     "api-client.js": "a0ee23e1d565dde4fd37361407daa87104ea548a807a7ba18ad4b5a86529134c",
     "config.js": "696a5977aeb736c55e9f70289131fa084b7958a1dc7ca5393edd17f3f0ac6854",
-    "index.html": "d36ea226a1f07c08642da6891e49736a069cfaf25e74d9896ee3ac2be4ebffa0",
+    "index.html": "29b758627ed818f76f8d7182caa6a5229f1b5e2024210b143660a2f8ef81167d",
     "index.js": "516cb7e236fe2c6386392d77e7aaf08b8108bb4b6df27c35591278458af844af",
     "login.css": "cecddeea74669c856bba5e7e11a73a1275082ddefd19c38b961394f45c33144d",
     "login.html": "024020d9945957605984dd55dc5bfce65e267c44f790af89c7dc42fcf26524c5",
@@ -15,7 +15,8 @@
     "surface-motion.js": "b8174d469b277ece3615bed2978658c9439bc6c5560863df7c1e62b0adb7ee51",
     "landing-theme.css": "66781afabd0e1001d51f0feb4fd1c00b77c5c7273fa7ae5bcc369d4d8fd5ec49",
     "social-links.css": "b4feb9ee8381b22aa000f404449fa8f9788ef2e08ebbf71b22bdacba0b8759e6",
-    "tokenomics.css": "2423c5350fb19515d3e644e0ee743a5aeb732f8058d2f145cc2d6b378ad215c8"
+    "tokenomics.css": "2423c5350fb19515d3e644e0ee743a5aeb732f8058d2f145cc2d6b378ad215c8",
+    "frontier-first.css": "b0d1b737b7b4cab09df1fcc52034e5f9aa108bef902e73a884fc1b78d4e96483"
   },
   "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",
   "sameOrigin": true,
