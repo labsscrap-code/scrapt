@@ -22,9 +22,10 @@ test('original simulation has no market/API network side effects',()=>{
   assert.doesNotMatch(text,/\bfetch\s*\(|new\s+(?:WebSocket|EventSource)\s*\(/,file);
  }
 });
-test('homepage starts with one eager instance of the existing HUD, before the preserved landing',()=>{
+test('homepage starts with the preserved landing and places one existing HUD after its footer',()=>{
  const html=fs.readFileSync(path.join(root,'frontend/index.html'),'utf8');
- assert.match(html,/<body><section class="frontier-first"[^>]*><iframe src="\/neural-frontier" title="Neural Frontier" loading="eager"><\/iframe><\/section><div class="shell">/);
+ assert.match(html,/<body><div class="shell">/);
+ assert.match(html,/<\/footer><\/div><section class="frontier-first"[^>]*><iframe src="\/neural-frontier" title="Neural Frontier" loading="eager"><\/iframe><\/section>/);
  assert.equal((html.match(/<iframe\b/g)||[]).length,1);
  assert.match(html,/<link rel="stylesheet" href="\/frontier-first.css">/);
  for(const id of ['product','features','tokenomics'])assert.match(html,new RegExp('id="'+id+'"'));
