@@ -19,6 +19,6 @@ Do not attach application source, credentials, account information, runtime logs
 
 Keep each change focused. Explain what changed and why, check links and spelling, and keep claims consistent with verified product behavior. Describe planned features as proposals rather than shipped functionality.
 
-This is a documentation-only repository. Do not add application code, workflows, packaged downloads or artwork without explicit maintainer approval. The ignore rules use a documentation allowlist to help maintain this boundary.
+This repository includes explicitly approved frontend source, restricted server integration, tests and documentation. Do not add private backend code, infrastructure configuration, credentials or unrelated assets. Expanded publication scope requires explicit maintainer approval; the Git ignore allowlist maintains that boundary.
 
 Contributing does not authorize publishing implementation or assets belonging to another contributor. Confirm release permission before proposing new material.

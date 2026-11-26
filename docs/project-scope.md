@@ -2,9 +2,9 @@
 
 ## Public repository purpose
 
-`labsscrap-code/scrapt` is the official public documentation and project-presentation repository for SCRAPT.
+`labsscrap-code/scrapt` is the official approved-frontend, public-documentation and project-presentation repository for SCRAPT.
 
-Its scope is product communication, high-level architecture, UX/UI direction, branding guidance and the roadmap. It does not contain the application implementation or a runnable release.
+Its scope includes the approved browser frontend, restricted Vercel integration, public tests, product communication and high-level architecture. The proprietary Python scanner, market-processing services, databases, operational credentials and trading infrastructure are excluded. Frontend build instructions are in frontend-release.md.
 
 ## Collaborative development
 

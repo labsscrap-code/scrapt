@@ -1,0 +1,13 @@
+'use strict';
+const {test}=require('node:test'),assert=require('node:assert/strict');
+const {englishAnswer,UNAVAILABLE}=require('../lib/scrappy-english.cjs');
+const original='Observaciones — Snapshot: 2026-11-26T16:49:37.561678+00:00; scanner actualizado.\n• Funding: 0.004502% (ya expresado en porcentaje).\n• Open interest: 97,791.64 BTC, no USD.\n\nInterpretación:\nEl funding y el open interest muestran niveles actuales sin indicar dirección futura.';
+test('actual Spanish production response becomes English facts without invented interpretation',()=>{
+ const out=englishAnswer(original);assert.match(out,/Observations — Snapshot:/);assert.match(out,/scanner is fresh/);assert.match(out,/0\.004502% \(already expressed as a percentage\)/);assert.match(out,/97,791\.64 BTC, not USD/);assert.ok(out.endsWith(UNAVAILABLE));assert.doesNotMatch(out,/Observaciones|Interpretación|niveles|español/);
+ assert.deepEqual(out.match(/\d[\d.,:+-]*/g),original.match(/\d[\d.,:+-]*/g));
+});
+test('legacy interpretation is suppressed even when Spanish has no common keywords',()=>{const raw=original.split('Interpretación:\n')[0]+'Interpretación:\nIncremento constante implica cautela.';assert.ok(englishAnswer(raw).endsWith(UNAVAILABLE));});
+test('missing data and stale scanners stay unavailable, never become zero',()=>{const raw='Observaciones — Snapshot: sin fecha; scanner/reloj no verificado; datos actuales no disponibles.\n• Precio en 15 min: historial reciente insuficiente o no verificado.\n• Funding: no disponible% (ya expresado en porcentaje).\n\nInterpretación:\nNo hay datos.';const out=englishAnswer(raw);assert.match(out,/current data unavailable/);assert.match(out,/insufficient or unverified recent history/);assert.doesNotMatch(out,/0%|No hay|Precio|sin fecha/);});
+test('quoted depth translation preserves the distinction from executed trades',()=>{const raw='Observaciones — Snapshot: test; scanner actualizado.\n• Book top20: bids 22.5 BTC; asks 26.1 BTC. Mayor liquidez cotizada en asks. No demuestra compras o ventas ejecutadas.\n\nInterpretación:\nEl mercado muestra liquidez.';const out=englishAnswer(raw);assert.match(out,/bids 22.5 BTC; asks 26.1 BTC/);assert.match(out,/does not establish executed buying or selling/);});
+test('unsupported Spanish responses fail closed rather than returning Spanish',()=>{assert.throws(()=>englishAnswer('El mercado está subiendo.'),/language/);assert.throws(()=>englishAnswer('Observaciones — malformed'),/invalid/);});
+test('the corrected English backend response passes through unchanged',()=>{const raw='Observations — Snapshot: test; scanner is fresh.\n• BTC: 60,000.00 USD.\n\nInterpretation:\nAvailable observations do not guarantee future direction.';assert.equal(englishAnswer(raw),raw);});

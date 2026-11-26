@@ -1,3 +1,4 @@
-/frontend/* -text
+# Preserve reviewed source bytes, including inline-script CSP and asset hashes.
+* -text
 *.png binary
-/neural-frontier/** -text
+*.woff2 binary

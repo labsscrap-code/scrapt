@@ -8,15 +8,18 @@
   <link rel="icon" href="/mascot.png">
   <link rel="stylesheet" href="/neural-frontier/hud.css">
   <link rel="stylesheet" href="/neural-frontier/host.css">
+  <link rel="stylesheet" href="/neural-frontier/edge-discovery.css">
+  <link rel="stylesheet" href="/neural-frontier/console-host.css">
   <script defer src="/neural-frontier/hud.js"></script>
+  <script defer src="/neural-frontier/console-host.js"></script>
 </head>
 <body class="font-mono antialiased">
   <nav class="frontier-host" aria-label="SCRAPT navigation">
     <a href="/#product" target="_top">← SCRAPT</a>
-    <span>NEURAL FRONTIER · LOCAL SIMULATION</span>
+    <span title="Conceptual simulation only; no real trades or live capital.">NEURAL FRONTIER · PRIVATE TEST ENVIRONMENT</span>
     <a href="/terminal" target="_top">LIVE TERMINAL ↗</a>
   </nav>
-  <div class="frontier-viewport"><div id="neural-root"></div></div>
+  <div class="frontier-viewport"><div id="neural-root"></div><div id="edge-root"></div><section class="eth-console-section" id="eth-sentiment-console" aria-labelledby="eth-console-title"><div class="eth-console-heading"><h2 id="eth-console-title">ETH SENTIMENT CONSOLE</h2><p>A multidimensional view of Ethereum market conditions.</p><p class="eth-method">Independent browser-based research · ETH/USDT with disclosed ETH/USD venue fallbacks · Composite and confidence are heuristic, not calibrated probabilities or a validated statistical edge. Sources may be unavailable by region. No simulated market data. EXECUTION: DISABLED.</p></div><div class="eth-console-frame"><iframe id="eth-sentiment-frame" src="/console/console.html" title="SCRAPT Neural Frontier — ETH sentiment console" loading="lazy" sandbox="allow-scripts allow-same-origin" referrerpolicy="no-referrer"></iframe></div><p class="eth-console-status" role="status"><span id="eth-console-message">Loading console when this module enters view…</span> <a href="/console/console.html" target="_blank" rel="noopener noreferrer">Open standalone console ↗</a></p></section></div>
   <noscript>This conceptual HUD requires JavaScript. <a href="/#product" target="_top">Return to SCRAPT</a>.</noscript>
 </body>
 </html>

@@ -7,14 +7,14 @@ test('original HUD components, simulation, styles and configuration remain byte-
 });
 test('HUD entry loads an isolated document and clearly identifies the intentional simulation',()=>{
  const html=fs.readFileSync(path.join(hud,'index.html'),'utf8');
- assert.match(html,/LOCAL SIMULATION/);assert.match(html,/href="\/terminal"/);
+ assert.match(html,/NEURAL FRONTIER · PRIVATE TEST ENVIRONMENT/);assert.match(html,/Intentional local simulation; not live trading/);assert.match(html,/no real trades or live capital/);assert.match(html,/href="\/terminal"/);
  assert.match(html,/defer src="\/neural-frontier\/hud.js"/);
  assert.doesNotMatch(html,/<script[^>]*>[^<]+<\/script>/);
  const config=JSON.parse(fs.readFileSync(path.join(root,'vercel.json')));
- assert.ok(config.rewrites.some(r=>r.source==='/neural-frontier'&&r.destination==='/neural-frontier/index.html'));
+ assert.ok(config.rewrites.some(r=>r.source==='/neural-frontier'&&r.destination==='/console/dashboard.html?view=neural')); 
 });
 test('landing and terminal expose the independent HUD route through their existing navigation',()=>{
- for(const file of ['index.html','terminal.html'])assert.match(fs.readFileSync(path.join(root,'frontend',file),'utf8'),/<a href="\/neural-frontier">Neural Frontier<\/a>/);
+ for(const file of ['terminal.html'])assert.match(fs.readFileSync(path.join(root,'frontend',file),'utf8'),/<a href="\/neural-frontier">Neural Frontier<\/a>/);
 });
 test('original simulation has no market/API network side effects',()=>{
  for(const dir of ['hooks','lib','components/dashboard'])for(const file of fs.readdirSync(path.join(hud,dir))){
@@ -22,20 +22,23 @@ test('original simulation has no market/API network side effects',()=>{
   assert.doesNotMatch(text,/\bfetch\s*\(|new\s+(?:WebSocket|EventSource)\s*\(/,file);
  }
 });
-test('homepage starts with the preserved landing and places one existing HUD after its footer',()=>{
+test('homepage renders only the landing; the research app exists exclusively on its dedicated route',()=>{
  const html=fs.readFileSync(path.join(root,'frontend/index.html'),'utf8');
  assert.match(html,/<body><div class="shell">/);
- assert.match(html,/<\/footer><\/div><section class="frontier-first"[^>]*><iframe src="\/neural-frontier" title="Neural Frontier" loading="eager"><\/iframe><\/section>/);
- assert.equal((html.match(/<iframe\b/g)||[]).length,1);
- assert.match(html,/<link rel="stylesheet" href="\/frontier-first.css">/);
+ assert.doesNotMatch(html,/<iframe\b|id="(?:neural-root|edge-root|eth-sentiment-frame)"|class="frontier-first"|src="\/neural-frontier\/hud\.js"/);
+ assert.doesNotMatch(html,/>Dashboard<\/a>|>Neural Frontier<\/a>/);
+ assert.match(html,/<a class="outline" href="\/terminal">OPEN TERMINAL/);
  for(const id of ['product','features','tokenomics'])assert.match(html,new RegExp('id="'+id+'"'));
+ const hud=fs.readFileSync(path.join(root,'neural-frontier/index.html'),'utf8');
+ for(const id of ['neural-root','edge-root','eth-sentiment-frame'])assert.ok(hud.includes('id="'+id+'"'));
 });
+
 test('only the HUD document can be embedded, and only by the same origin',()=>{
  const config=JSON.parse(fs.readFileSync(path.join(root,'vercel.json')));
  function policies(url){return config.headers.filter(rule=>new RegExp('^'+rule.source.replace('/:path*','(?:/.*)?')+'$').test(url)).flatMap(rule=>rule.headers.filter(h=>h.key==='Content-Security-Policy').map(h=>h.value));}
  const baseline=JSON.parse(fs.readFileSync(path.join(root,'approved-frontend.json'))).csp;
- for(const url of ['/','/index.html','/terminal','/terminal.html','/login','/api/v1/snapshot'])assert.deepEqual(policies(url),[baseline],url);
- for(const url of ['/neural-frontier','/neural-frontier/','/neural-frontier/index.html']){
+ for(const url of ['/','/index.html','/terminal.html','/login','/api/v1/snapshot'])assert.deepEqual(policies(url),[baseline],url);
+ for(const url of ['/neural-frontier/index.html']){
   const p=policies(url);assert.equal(p.length,1,url);assert.match(p[0],/frame-ancestors 'self'/);assert.doesNotMatch(p[0],/frame-ancestors \*/);
  }
 });

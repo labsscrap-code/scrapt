@@ -1,4 +1,4 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8">
+<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>SCRAPT — Market Terminal</title><meta name="description" content="SCRAPT real-time market intelligence, quantitative signals and market context."><style>
 :root{--bg:#04060b;--glass:rgba(255,255,255,.045);--glass2:rgba(255,255,255,.028);
@@ -239,23 +239,23 @@ body{height:100dvh;display:flex;flex-direction:column;padding-bottom:130px}heade
 </style></head><body>
 <div class="aurora"><i></i><i></i><i></i></div>
 
-<a class="skip" href="#bento">Saltar al panel</a><header>
- <h1><a href="/" aria-label="SCRAPT — Inicio">SCRAPT</a></h1><nav aria-label="Terminal"><a href="/terminal" aria-current="page">Markets</a><a href="#alerts">Alerts</a><a href="#settings">Settings</a><a href="/neural-frontier">Neural Frontier</a></nav><div class="dot off" id="dot" role="status" aria-label="Esperando datos"></div>
+<a class="skip" href="#bento">Skip to dashboard</a><header>
+ <h1><a href="/" aria-label="SCRAPT — Home">SCRAPT</a></h1><nav aria-label="Terminal"><a href="/terminal" aria-current="page">Markets</a><a href="#alerts">Alerts</a><a href="#settings">Settings</a><a href="/neural-frontier">Neural Frontier</a></nav><div class="dot off" id="dot" role="status" aria-label="Waiting for data"></div>
  <span id="stale" role="status" aria-live="polite"></span>
- <button class="hbtn on" id="btnPause">⏸ Pausar</button>
- <button class="hbtn" id="btnSound">🔕 Sonido</button>
+ <button class="hbtn on" id="btnPause">⏸ Pause</button>
+ <button class="hbtn" id="btnSound">🔕 Sound</button>
 </header><main id="terminalContent" aria-label="Market terminal">
 
-<div id="tape" aria-label="Market ticker"><div class="tape-track" id="tapeTrack"><span class="ti">Esperando datos de mercado…</span></div></div>
+<div id="tape" aria-label="Market ticker"><div class="tape-track" id="tapeTrack"><span class="ti">Waiting for market data…</span></div></div>
 
 <div class="hero">
   <div>
     <div class="price" id="btcPrice">—</div>
-    <div class="sub"><span class="badge" id="btcChg">…</span>&nbsp;&nbsp;<span id="symLabel">BTC/USDT</span> · Binance · REST + WSS · estado por fuente</div>
+    <div class="sub"><span class="badge" id="btcChg">…</span>&nbsp;&nbsp;<span id="symLabel">BTC/USDT</span> · Binance · REST + WSS · Source status</div>
   </div>
   <div id="chartWrap">
     <div class="rng"><button data-r="60" class="on">5m</button><button data-r="180">15m</button><button data-r="420">35m</button></div>
-    <svg role="img" aria-label="Historial de precio BTC" id="chart" viewBox="0 0 600 100" preserveAspectRatio="none"></svg>
+    <svg role="img" aria-label="BTC price history" id="chart" viewBox="0 0 600 100" preserveAspectRatio="none"></svg>
     <div id="tip"></div>
   </div>
   <div class="right">
@@ -271,50 +271,50 @@ body{height:100dvh;display:flex;flex-direction:column;padding-bottom:130px}heade
 </div>
 
 <div class="bento" id="bento" tabindex="-1">
-  <div class="tile t3"><h3>Miedo &amp; Codicia</h3><div id="fngTile"></div></div>
+  <div class="tile t3"><h3>Fear &amp; Greed</h3><div id="fngTile"></div></div>
   <div class="tile t3"><h3>Funding</h3><div id="fundTile"></div></div>
   <div class="tile t3"><h3>Open Interest</h3><div id="oiTile"></div></div>
   <div class="tile t3"><h3>Book top20</h3><div id="bookTile"></div></div>
-  <div class="tile t5"><h3>Radar de reglas <span id="radarSub" style="text-transform:none;letter-spacing:0;color:var(--dim)"></span></h3>
+  <div class="tile t5"><h3>Rule radar <span id="radarSub" style="text-transform:none;letter-spacing:0;color:var(--dim)"></span></h3>
     <div class="radar-wrap"><div class="radar-circle"><span class="radar-ping"></span><span class="radar-ping p2"></span><span class="radar-ping p3"></span></div>
     <div class="rules" id="radar"></div></div></div>
-  <div class="tile t4"><h3>Pipeline de texto (IA)</h3><div id="pipe"></div></div>
-  <div class="tile t3"><h3>Veredicto de Scrappy</h3><div id="verdict" class="sm">analizando…</div></div>
-  <div class="tile t8"><h3>⚡ Alertas recientes</h3><div class="chips" id="chips"></div>
-    <p id="alertsState" class="sm" role="status"></p><div id="alerts"><div class="empty">Cargando alertas…</div></div></div>
+  <div class="tile t4"><h3>News pipeline (AI)</h3><div id="pipe"></div></div>
+  <div class="tile t3"><h3>Scrappy’s market summary</h3><div id="verdict" class="sm">Analyzing…</div></div>
+  <div class="tile t8"><h3>⚡ Recent alerts</h3><div class="chips" id="chips"></div>
+    <p id="alertsState" class="sm" role="status"></p><div id="alerts"><div class="empty">Loading alerts…</div></div></div>
   <div class="tile t4"><h3>Watchlist 24h</h3><table class="wl" id="wl"></table>
-    <div class="sm" style="font-size:10px;color:var(--dim);margin-top:7px">barra = |cambio 24h| relativo al grupo</div></div>
+    <div class="sm" style="font-size:10px;color:var(--dim);margin-top:7px">bar = |24h change| relative to the group</div></div>
 </div>
 
 <!-- Scrappy flotante -->
-<button type="button" id="scrappy" title="Estado de Scrappy" aria-label="Abrir chat con Scrappy" aria-expanded="false" aria-controls="chatPanel">
+<button type="button" id="scrappy" title="Scrappy status" aria-label="Open Scrappy chat" aria-expanded="false" aria-controls="chatPanel">
   <div class="avatar">
     <span class="ring"></span>
     <img src="/mascot.png?v=3" alt="Scrappy">
   </div>
-  <div class="tag"><span class="st"></span><b>Scrappy</b>&nbsp;· IA de mercado</div>
+  <div class="tag"><span class="st"></span><b>Scrappy</b>&nbsp;· Market AI</div>
 </button>
 <div id="scrappyBubble"></div>
 
-<div id="chatPanel" role="region" aria-label="Chat con Scrappy">
+<div id="chatPanel" role="region" aria-label="Chat with Scrappy">
   <div class="chat-head">
     <img src="/mascot.png?v=3" alt="">
-    <div><div class="nm">Scrappy</div><div class="st">Contexto de mercado en vivo</div></div>
-    <button type="button" class="x" aria-label="Cerrar chat">✕</button>
+    <div><div class="nm">Scrappy</div><div class="st">Live market context</div></div>
+    <button type="button" class="x" aria-label="Close chat">✕</button>
   </div>
   <div class="chat-body" id="chatBody" role="log" aria-live="polite">
-    <div class="bm bot">Soy Scrappy. Pregúntame por BTC, funding, open interest o alertas. Uso datos reales del panel e indico cuando faltan datos. Mantengo hasta cuatro intercambios durante 30 minutos.</div>
+    <div class="bm bot">I’m Scrappy. Ask me about BTC, funding, open interest or alerts. I use real dashboard data and tell you when information is missing. I retain up to four exchanges for 30 minutes.</div>
   </div>
   <div class="chat-sug" id="sug"></div>
   <div class="chat-in">
-    <input id="chatInput" maxlength="2000" aria-label="Tu pregunta para Scrappy" placeholder="Pregunta sobre el mercado…">
-    <button type="button">Enviar</button>
+    <input id="chatInput" maxlength="2000" aria-label="Your question for Scrappy" placeholder="Ask about the market…">
+    <button type="button">Send</button>
   </div>
 </div>
 
-<section id="settings" aria-label="Acceso al piloto"><h2>Acceso al piloto</h2>
-<p id="accountStatus" class="sm" role="status">Comprobando sesión…</p>
-<button type="button" id="refreshData">Actualizar datos</button>
-<button type="button" id="logout">Cerrar sesión</button>
-<p class="sm">Configuración y credenciales gestionadas en el servidor · IA desactivada</p></section>
+<section id="settings" aria-label="Pilot access"><h2>Pilot access</h2>
+<p id="accountStatus" class="sm" role="status">Checking session…</p>
+<button type="button" id="refreshData">Refresh data</button>
+<button type="button" id="logout">Log out</button>
+<p class="sm">Configuration and credentials managed on the server · News AI disabled</p></section>
 </main><script src="/config.js"></script><script src="/api-client.js"></script><script src="/terminal.js"></script></body></html>

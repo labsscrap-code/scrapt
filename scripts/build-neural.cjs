@@ -13,5 +13,5 @@ esbuild.buildSync({entryPoints:[path.join(source,'mount.tsx')],outfile:path.join
 const tailwind=path.join(source,'node_modules/tailwindcss/lib/cli.js');
 const result=cp.spawnSync(process.execPath,[tailwind,'-c','tailwind.config.ts','-i','app/globals.css','-o',path.join(out,'hud.css'),'--minify'],{cwd:source,stdio:'inherit'});
 if(result.status!==0)throw new Error('HUD stylesheet build failed');
-for(const name of ['index.html','host.css','jetbrains-mono-latin.woff2'])fs.copyFileSync(path.join(source,name),path.join(out,name));
+for(const name of ['index.html','host.css','edge-discovery.css','console-host.css','console-host.js','jetbrains-mono-latin.woff2'])fs.copyFileSync(path.join(source,name),path.join(out,name));
 console.log('Built original Neural Frontier HUD with isolated React runtime and stylesheet.');

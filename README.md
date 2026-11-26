@@ -10,12 +10,12 @@ SCRAPT brings crypto market monitoring, derivatives indicators, sentiment and al
 
 This is the official **public frontend and documentation** repository for SCRAPT, maintained under **labsscrap-code**.
 
-It contains the approved static web interface, a restricted Vercel API proxy and product documentation. The proprietary Python scanner, detection logic, database and AI integration remain on the private backend and are not included.
+It contains the approved static web interface, a restricted Vercel API proxy and product documentation. The proprietary Python scanner, detection logic, database and core AI orchestration remain on the private backend and are not included.
 
 ## Web deployment
 
-Use Node.js 24: `npm ci`, `npm run build`, `npm run lint`, `npm test`.
-Vercel serves `public/` and the allowlisted `/api/v1/` function. No frontend framework or runtime dependency is required. The build verifies every approved frontend asset against its SHA-256 manifest. AI remains disabled.
+Use Node.js 24: `npm ci`, `npm ci --prefix neural-frontier --ignore-scripts --include=dev`, `npm run build`, `npm run lint`, `npm test`.
+Vercel serves `public/` and the allowlisted `/api/v1/` function. No frontend framework or runtime dependency is required. The build verifies every approved frontend asset against its SHA-256 manifest. Public Scrappy requires explicit server-side activation and retains upstream quotas.
 
 Configure server-side environment variables `SCRAPT_UPSTREAM_IP`,
 `SCRAPT_UPSTREAM_TLS_NAME`, `SCRAPT_UPSTREAM_ORIGIN` and optionally
@@ -29,7 +29,7 @@ validates the actual browser Origin, and preserves secure host-only session cook
 CSRF tokens and backend rate limits. Authenticated responses are never cached.
 The terminal uses anonymous read-only snapshots, history and alerts. Sessions,
 news and operator authentication remain protected on the backend; the public
-terminal does not request a session or redirect to login. AI remains disabled.
+terminal does not request a session or redirect to login. Public Scrappy requires explicit server-side activation and retains upstream quotas.
 
 Before moving the custom-domain DNS, establish a stable backend TLS hostname and
 certificate renewal independent of the frontend hostname. Do not retire the
@@ -47,7 +47,7 @@ existing VPS services or TLS route while the proxy depends on them.
 | Scrappy assistant | Ask for explanations based on the dashboard's available context. |
 | Workspace controls | Use time-range controls, pause/resume and optional sound notifications. |
 
-Data availability depends on connected backend services. AI explanations are disabled in this web release.
+Data availability depends on connected backend services. Public Scrappy returns English AI interpretations when its configured backend and provider are available; see [frontend release documentation](docs/frontend-release.md) for verified scope and limitations.
 
 SCRAPT is an information and analysis tool. It does not execute trades, promise returns or provide predictive guarantees.
 
@@ -94,3 +94,7 @@ Do not submit credentials, account data, application source or runtime files. Se
 Application downloads and release dates are not announced by this repository. Any future public release will require its own review and documentation.
 
 No software license or application redistribution rights are granted by this documentation publication. No license has been selected for this repository; contact the maintainers before reusing project assets or materials beyond an authorized contribution.
+
+## Current frontend source
+
+This branch synchronizes the approved Terminal V3 production frontend. See [routes, build instructions and release boundaries](docs/frontend-release.md). The original landing, Terminal, Neural Frontier, Execution, Micro Replay and Field Notes sources are included. Execution remains locked. Private Python services, production settings and deployment credentials are excluded.
