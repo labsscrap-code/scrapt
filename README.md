@@ -1,5 +1,7 @@
 # SCRAPT
 
+[![verify](https://github.com/labsscrap-code/scrapt/actions/workflows/verify.yml/badge.svg)](https://github.com/labsscrap-code/scrapt/actions/workflows/verify.yml)
+
 **CLARITY IN MARKET CHAOS.**
 
 Real-time market intelligence. Quantitative signals. Data-driven decisions.
@@ -12,10 +14,24 @@ This is the official **public frontend and documentation** repository for SCRAPT
 
 It contains the approved static web interface, a restricted Vercel API proxy and product documentation. The proprietary Python scanner, detection logic, database and core AI orchestration remain on the private backend and are not included.
 
+## Reproduce verification
+
+Use Node.js 24 and both committed lockfiles. A clean checkout needs both installations:
+
+```sh
+npm ci --ignore-scripts
+npm ci --prefix neural-frontier --ignore-scripts --include=dev
+npm run verify
+```
+
+`verify` runs secret scanning, immutable production-provenance checks, JavaScript syntax checks, tests and the static build. The GitHub Actions workflow runs the same commands on Ubuntu. See [engineering updates](docs/ENGINEERING_UPDATES.md), [CHANGELOG](CHANGELOG.md), [release notes](docs/releases/v2026.11.26.md) and the [repository runbook](docs/operations/repository-runbook.md). A draft release is not a published release.
+
+No new license or contributor-rights assignment is introduced by these engineering updates. Existing third-party notices and contributor rights are retained.
+
 ## Web deployment
 
-Use Node.js 24: `npm ci`, `npm ci --prefix neural-frontier --ignore-scripts --include=dev`, `npm run build`, `npm run lint`, `npm test`.
-Vercel serves `public/` and the allowlisted `/api/v1/` function. No frontend framework or runtime dependency is required. The build verifies every approved frontend asset against its SHA-256 manifest. Public Scrappy requires explicit server-side activation and retains upstream quotas.
+Use the verification sequence above. Deployments require separate authorization and private server configuration.
+Vercel serves `public/` and the allowlisted `/api/v1/` function. The main app is static HTML/CSS/JavaScript; the retained conceptual HUD uses an isolated bundled React runtime. The build verifies every approved frontend asset against its SHA-256 manifest. Public Scrappy requires explicit server-side activation and retains upstream quotas.
 
 Configure server-side environment variables `SCRAPT_UPSTREAM_IP`,
 `SCRAPT_UPSTREAM_TLS_NAME`, `SCRAPT_UPSTREAM_ORIGIN` and optionally
@@ -97,4 +113,4 @@ No software license or application redistribution rights are granted by this doc
 
 ## Current frontend source
 
-This branch synchronizes the approved Terminal V3 production frontend. See [routes, build instructions and release boundaries](docs/frontend-release.md). The original landing, Terminal, Neural Frontier, Execution, Micro Replay and Field Notes sources are included. Execution remains locked. Private Python services, production settings and deployment credentials are excluded.
+The main branch is the authoritative approved frontend source; live deployments are tracked separately by commit and deployment evidence. See [routes, build instructions and release boundaries](docs/frontend-release.md). The original landing, Terminal, Neural Frontier, Execution, Micro Replay and Field Notes sources are included. Execution remains locked. Private Python services, production settings and deployment credentials are excluded.

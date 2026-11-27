@@ -176,3 +176,12 @@ Thumbs.db
 !/scripts/verify-production-source.cjs
 !/tests/engineering-verification.test.cjs
 !/.github/workflows/
+
+# Reviewed release-management documentation.
+!/CHANGELOG.md
+!/.github/pull_request_template.md
+!/docs/ENGINEERING_UPDATES.md
+!/docs/releases/
+!/docs/releases/v2026.11.26.md
+!/docs/operations/
+!/docs/operations/repository-runbook.md
