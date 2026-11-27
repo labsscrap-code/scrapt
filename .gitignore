@@ -169,3 +169,10 @@ venv/
 *.tsbuildinfo
 .DS_Store
 Thumbs.db
+
+# Reviewed HERMES engineering verification.
+!/.github/workflows/verify.yml
+!/scripts/secret-scan.cjs
+!/scripts/verify-production-source.cjs
+!/tests/engineering-verification.test.cjs
+!/.github/workflows/

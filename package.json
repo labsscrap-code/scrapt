@@ -2,10 +2,13 @@
   "name": "scrapt-web",
   "version": "1.0.0",
   "private": true,
-  "engines": { "node": "24.x" },
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "build": "node scripts/build.cjs",
     "lint": "node scripts/check.cjs",
-    "test": "node --test tests/*.test.cjs"
+    "test": "node --test tests/*.test.cjs",
+    "verify": "node scripts/secret-scan.cjs && node scripts/verify-production-source.cjs && npm run lint && npm test && npm run build"
   }
 }
