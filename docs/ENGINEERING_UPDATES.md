@@ -2,6 +2,8 @@
 
 An engineering update should leave a reviewable commit, changelog entry, reproducible verification result and clear release status. Do not publish unsupported performance, profit or availability claims.
 
+The permanent agent instructions are in [`AGENTS.md`](../AGENTS.md). They require approved public changes to be committed and synchronized with GitHub, with CI verified for the latest head before integration. Production deployment always requires separate explicit authorization.
+
 ## Verification sequence
 
 Use Node.js 24 and the committed lockfiles:

@@ -185,3 +185,6 @@ Thumbs.db
 !/docs/releases/v2026.11.26.md
 !/docs/operations/
 !/docs/operations/repository-runbook.md
+
+# Permanent, reviewed engineering instructions.
+!/AGENTS.md

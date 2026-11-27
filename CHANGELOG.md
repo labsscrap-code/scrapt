@@ -6,6 +6,7 @@ Changes are recorded with reproducible evidence. Repository releases use calenda
 
 ### Added
 
+- Permanent `AGENTS.md` instructions for tested, security-reviewed GitHub synchronization, CI verification for the latest commit and explicit separation from production deployment.
 - Reproducible GitHub Actions verification on Ubuntu 24.04 and Node.js 24, installing both locked dependency trees.
 - Fail-closed secret and production-integrity checks, with 12 focused verification regression tests.
 - Release notes, a pull request template and an engineering publication runbook adapted from the independently reviewed HERMES package.
